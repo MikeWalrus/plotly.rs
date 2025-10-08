@@ -229,6 +229,7 @@ pub enum PlotType {
     Surface,
     DensityMapbox,
     Table,
+    Treemap,
     Pie,
 }
 

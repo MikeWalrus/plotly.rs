@@ -19,6 +19,7 @@ pub mod scatter_mapbox;
 mod scatter_polar;
 pub mod surface;
 pub mod table;
+pub mod treemap;
 
 pub use bar::Bar;
 pub use box_plot::BoxPlot;
@@ -38,5 +39,6 @@ pub use scatter_mapbox::ScatterMapbox;
 pub use scatter_polar::ScatterPolar;
 pub use surface::Surface;
 pub use table::Table;
+pub use treemap::Treemap;
 
 pub use self::image::Image;
