@@ -860,6 +860,11 @@ impl Marker {
         self.colors = Some(ColorArray(colors).into());
         self
     }
+
+    pub fn colors_dyn(mut self, colors: Vec<Box<dyn Color>>) -> Self {
+        self.colors = Some(colors);
+        self
+    }
 }
 
 #[serde_with::skip_serializing_none]

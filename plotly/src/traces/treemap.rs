@@ -5,14 +5,17 @@ use serde::{ser::Serializer, Serialize};
 
 use crate::{
     color::Color,
-    common::{Dim, Domain, Font, Label, LegendGroupTitle, Marker, PlotType, TextPosition, Visible},
-    private::{NumOrString, NumOrStringCollection},
+    common::{Dim, Domain, Font, Label, LegendGroupTitle, Marker, PlotType, Position, TextPosition, Visible},
+    private::{NumOrString, NumOrStringCollection}, Trace,
 };
 
 #[serde_with::skip_serializing_none]
 #[derive(Serialize, Clone, Debug, FieldSetter)]
 #[field_setter(box_self, kind = "trace")]
-pub struct Treemap {
+pub struct Treemap<V>
+where
+    V: Serialize + Clone,
+{
     #[field_setter(default = "PlotType::Treemap")]
     r#type: PlotType,
     /// Sets the trace name. The trace name appears as the legend item and on
@@ -51,7 +54,7 @@ pub struct Treemap {
     parents: Option<Vec<String>>,
     /// Sets the values associated with each of the sectors. Use with
     /// `branchvalues` to determine how the values are summed.
-    values: Option<Vec<f64>>,
+    values: Option<Vec<V>>,
     /// Sets the labels of each of the sectors.
     labels: Option<Vec<String>>,
     /// Sets text elements associated with each sector. If trace `textinfo`
@@ -62,7 +65,7 @@ pub struct Treemap {
     text: Option<Vec<String>>,
     #[serde(rename = "textposition")]
     /// Sets the positions of the `text` elements.
-    text_position: Option<TextPosition>,
+    text_position: Option<Position>,
     /// Template string used for rendering the information text that appear on
     /// points. Note that this will override textinfo. Variables are
     /// inserted using %{variable}, for example “y: %{y}”. Numbers are formatted
@@ -176,7 +179,13 @@ pub struct Treemap {
     ui_revision: Option<NumOrString>,
 }
 
-impl Treemap {
+impl<V> Trace for Treemap<V> where V: Serialize + Clone {
+    fn to_json(&self) -> String {
+        serde_json::to_string(self).unwrap()
+    }
+}
+
+impl<V> Treemap<V> where V: Serialize + Clone {
     pub fn new() -> Self {
         Default::default()
     }
@@ -386,6 +395,8 @@ impl Node {
 mod tests {
     use serde_json::{json, to_value};
 
+    use crate::common::Position;
+
     use super::*;
 
     #[test]
@@ -403,7 +414,7 @@ mod tests {
             .values(vec![10.0, 20.0])
             .labels(vec!["A".to_string(), "B".to_string()])
             .text(vec!["Text A".to_string(), "Text B".to_string()])
-            .text_position(TextPosition::Inside)
+            .text_position(Position::TopLeft)
             .text_template("%{label}")
             .hover_text("Hover Text")
             .hover_info(HoverInfo::All)
