@@ -5,8 +5,9 @@ use serde::{ser::Serializer, Serialize};
 
 use crate::{
     color::Color,
-    common::{Dim, Domain, Font, Label, LegendGroupTitle, Marker, PlotType, Position, TextPosition, Visible},
-    private::{NumOrString, NumOrStringCollection}, Trace,
+    common::{Dim, Domain, Font, Label, LegendGroupTitle, Marker, PlotType, Position, Visible},
+    private::{NumOrString, NumOrStringCollection},
+    Trace,
 };
 
 #[serde_with::skip_serializing_none]
@@ -179,13 +180,19 @@ where
     ui_revision: Option<NumOrString>,
 }
 
-impl<V> Trace for Treemap<V> where V: Serialize + Clone {
+impl<V> Trace for Treemap<V>
+where
+    V: Serialize + Clone,
+{
     fn to_json(&self) -> String {
         serde_json::to_string(self).unwrap()
     }
 }
 
-impl<V> Treemap<V> where V: Serialize + Clone {
+impl<V> Treemap<V>
+where
+    V: Serialize + Clone,
+{
     pub fn new() -> Self {
         Default::default()
     }
@@ -395,9 +402,8 @@ impl Node {
 mod tests {
     use serde_json::{json, to_value};
 
-    use crate::common::Position;
-
     use super::*;
+    use crate::common::Position;
 
     #[test]
     fn serialize_treemap() {

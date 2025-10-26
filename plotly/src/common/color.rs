@@ -370,6 +370,8 @@ pub enum NamedColor {
     Transparent,
 }
 
+impl Color for Box<dyn Color> {}
+
 #[cfg(test)]
 mod tests {
     use serde_json::{from_value, json, to_value};
