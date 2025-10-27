@@ -21,6 +21,7 @@ pub mod surface;
 pub mod table;
 pub mod treemap;
 pub mod choropleth;
+pub mod parcoords;
 
 pub use bar::Bar;
 pub use box_plot::BoxPlot;

@@ -231,7 +231,8 @@ pub enum PlotType {
     Table,
     Treemap,
     Pie,
-    Choropleth
+    Choropleth,
+    ParCoords
 }
 
 #[derive(Serialize, Clone, Debug)]

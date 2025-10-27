@@ -2,8 +2,10 @@ use plotly_derive::FieldSetter;
 use serde::Serialize;
 
 use crate::color::Color;
+use crate::common::Domain;
 use crate::layout::{Axis, Center, Projection};
 
+#[serde_with::skip_serializing_none]
 #[derive(Serialize, Clone, Debug, FieldSetter)]
 
 pub struct LayoutGeo {
@@ -40,6 +42,7 @@ pub struct LayoutGeo {
     coastlinewidth: Option<u8>,
     /// Set the scope of the map
     scope: Option<GeoScope>,
+    domain: Option<Domain>
 }
 
 impl LayoutGeo {
