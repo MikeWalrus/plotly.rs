@@ -35,15 +35,34 @@ pub struct LayoutGeo {
     lonaxis: Option<Axis>,
     /// Configures the latitude axis
     lataxis: Option<Axis>,
-    // Sets the coastline stroke width (in px).
+    /// Sets the coastline stroke width (in px).
     #[field_setter(default = "Some(1)")]
     coastlinewidth: Option<u8>,
+    /// Set the scope of the map
+    scope: Option<GeoScope>,
 }
 
 impl LayoutGeo {
     pub fn new() -> Self {
         Default::default()
     }
+}
+
+#[derive(Serialize, Clone, Debug)]
+#[serde(rename_all = "lowercase")]
+pub enum GeoScope {
+    Africa,
+    Antarctica,
+    Asia,
+    Europe,
+    Australia,
+    #[serde(rename = "north america")]
+    NorthAmerica,
+    Oceania,
+    #[serde(rename = "south america")]
+    SouthAmerica,
+    Usa,
+    World,
 }
 
 #[cfg(test)]

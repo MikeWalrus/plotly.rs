@@ -20,6 +20,7 @@ mod scatter_polar;
 pub mod surface;
 pub mod table;
 pub mod treemap;
+pub mod choropleth;
 
 pub use bar::Bar;
 pub use box_plot::BoxPlot;
@@ -40,5 +41,6 @@ pub use scatter_polar::ScatterPolar;
 pub use surface::Surface;
 pub use table::Table;
 pub use treemap::Treemap;
+pub use choropleth::Choropleth;
 
 pub use self::image::Image;

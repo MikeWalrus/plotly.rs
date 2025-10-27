@@ -36,7 +36,7 @@ pub use self::axis::{
     ConstrainDirection, RangeMode, RangeSelector, RangeSlider, RangeSliderYAxis, SelectorButton,
     SelectorStep, SliderRangeMode, SpikeMode, SpikeSnap, StepMode, TicksDirection, TicksPosition,
 };
-pub use self::geo::LayoutGeo;
+pub use self::geo::{LayoutGeo, GeoScope};
 pub use self::grid::{GridDomain, GridPattern, GridXSide, GridYSide, LayoutGrid, RowOrder};
 pub use self::legend::{GroupClick, ItemClick, ItemSizing, Legend, TraceOrder};
 pub use self::mapbox::{Center, Mapbox, MapboxStyle};
