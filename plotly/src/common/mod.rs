@@ -875,6 +875,7 @@ pub struct Font {
     family: Option<String>,
     size: Option<usize>,
     color: Option<Box<dyn Color>>,
+    shadow: Option<Dim<String>>
 }
 
 impl Font {

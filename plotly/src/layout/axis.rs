@@ -6,7 +6,7 @@ use crate::common::{
     Anchor, AxisSide, Calendar, ColorBar, ColorScale, DashType, ExponentFormat, Font,
     TickFormatStop, TickMode, Title,
 };
-use crate::layout::RangeBreak;
+use crate::layout::{AutoRange, RangeBreak};
 use crate::private::{NumOrString, NumOrStringCollection};
 
 #[derive(Serialize, Clone, Debug, PartialEq)]
@@ -405,7 +405,8 @@ pub struct Axis {
     #[field_setter(skip)]
     r#type: Option<AxisType>,
     #[serde(rename = "autorange")]
-    auto_range: Option<bool>,
+    #[field_setter(skip)]
+    auto_range: Option<AutoRange>,
     #[serde(rename = "rangebreaks")]
     range_breaks: Option<Vec<RangeBreak>>,
     #[serde(rename = "rangemode")]
@@ -550,6 +551,11 @@ impl Axis {
     /// with API prior to AxisRange introduction.
     pub fn range(mut self, range: impl Into<AxisRange>) -> Self {
         self.range = Some(range.into());
+        self
+    }
+
+    pub fn auto_range(mut self, auto_range: impl Into<AutoRange>) -> Self {
+        self.auto_range = Some(auto_range.into());
         self
     }
 }
